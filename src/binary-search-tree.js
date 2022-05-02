@@ -48,23 +48,22 @@ class BinarySearchTree {
   }
 
   find(data) {
-    let findNode = this.node;
-    
-    while(findNode) {
-      if (data < findNode.data) {
-        findNode = findNode.left;
-      } else if (data > findNode.data) {
-        findNode = findNode.right;
-      } else {
-        return findNode;
+    return searchWithin(this.node, data);
+    function searchWithin(node, data) {
+      if (!node) {
+        return null;
       }
+      if (node.data === data) {
+        return node;
+      }
+      return data < node.data ?
+        searchWithin(node.left, data) :
+        searchWithin(node.right, data);
     }
-
-    return null;
   }
 
   remove(data) {
-    this.node = removeNode(node, data);
+    this.node = removeNode(this.node, data);
 
     function removeNode(node, data){
       if (!node){
